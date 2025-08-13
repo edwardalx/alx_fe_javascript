@@ -20,7 +20,7 @@ function changeColor(){
 //     });
 //     quoteList.appendChild(makeList)
 // }
-const objFunction = () => {
+const showRandomQuote  = () => {
   quoteList.textContent = ""; // clear previous content
   const makeList = document.createElement("ul");
   
@@ -75,5 +75,5 @@ newQuoteCatField.value=""
 button.addEventListener("click",(e)=>{
     e.preventDefault()
     changeColor()
-    objFunction()
+    showRandomQuote()
 })

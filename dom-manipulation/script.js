@@ -1,7 +1,7 @@
 let button = document.getElementById("newQuote");
 let quoteList = document.getElementById("quoteDisplay");
 const header = document.querySelector("h1");
-const myObject = [{text:"one",category:"bee"}, {text:"two",category:"cee"}]
+const myObject = [{text:"one",category:"random"}, {text:"two",category:"cee"}]
 
 function changeColor(){
   

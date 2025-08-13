@@ -1,7 +1,7 @@
 let button = document.getElementById("newQuote");
 let quoteList = document.getElementById("quoteDisplay");
 const header = document.querySelector("h1");
-const myObject = [{text:"one",category:"random"}, {text:"two",category:"cee"}]
+const myObject = [{text:"one",category:"bee"}, {text:"two",category:"cee"}]
 
 function changeColor(){
   
@@ -20,7 +20,7 @@ function changeColor(){
 //     });
 //     quoteList.appendChild(makeList)
 // }
-const showRandomQuote  = () => {
+const objFunction = () => {
   quoteList.textContent = ""; // clear previous content
   const makeList = document.createElement("ul");
   
@@ -33,6 +33,20 @@ const showRandomQuote  = () => {
     makeList.appendChild(list);
   }
   
+  quoteList.appendChild(makeList);
+};
+const showRandomQuote = () => {
+  quoteList.textContent = ""; // clear previous content
+
+  // get a random index from 0 to myObject.length - 1
+  const randomIndex = Math.floor(Math.random() * myObject.length);
+  const quote = myObject[randomIndex];
+
+  const makeList = document.createElement("ul");
+  const list = document.createElement("li");
+  list.textContent = `${quote.text}: ${quote.category}`;
+  makeList.appendChild(list);
+
   quoteList.appendChild(makeList);
 };
 

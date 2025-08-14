@@ -93,6 +93,29 @@ newQuoteCatField.value=""
 //   textInput.value = "";
 //   catInput.value = "";
 // };
+function importFromJsonFile(event) {
+    const fileReader = new FileReader();
+    fileReader.onload = function(e) {
+      const importedQuotes = JSON.parse(e.target.result);
+      myObject.push(...importedQuotes);
+      // myObject = importedQuotes;  replace the array entirely
+      localStorage.setItem(JSON.stringify("storedQuote",myObject))
+      alert('Quotes imported successfully!');
+    };
+    fileReader.readAsText(event.target.files[0]);
+  }
+// -------- EXPORT JSON --------
+document.getElementById("exportBtn").addEventListener("click", () => {
+  const blob = new Blob([JSON.stringify(myObject, null, 2)], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "quotes.json";
+  a.click();
+
+  URL.revokeObjectURL(url); // cleanup
+});
 
 button.addEventListener("click",(e)=>{
     e.preventDefault()

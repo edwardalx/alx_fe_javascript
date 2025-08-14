@@ -99,7 +99,7 @@ function importFromJsonFile(event) {
       const importedQuotes = JSON.parse(e.target.result);
       myObject.push(...importedQuotes);
       // myObject = importedQuotes;  replace the array entirely
-      localStorage.setItem(JSON.stringify("storedQuote",myObject))
+      localStorage.setItem("storedQuote", JSON.stringify(myObject))
       alert('Quotes imported successfully!');
     };
     fileReader.readAsText(event.target.files[0]);

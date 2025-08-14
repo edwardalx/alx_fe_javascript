@@ -63,7 +63,7 @@ const showRandomQuote = () => {
 
 //   quoteList.appendChild(makeList);
 // }
-const addQuote = ()=>{
+const createAddQuoteForm = ()=>{
 const newQuoteField = document.getElementById("newQuoteText")
 const newQuoteCatField = document.getElementById("newQuoteCategory")
 const newQuoteText=newQuoteField.value

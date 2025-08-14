@@ -1,7 +1,11 @@
 let button = document.getElementById("newQuote");
 let quoteList = document.getElementById("quoteDisplay");
 const header = document.querySelector("h1");
-const myObject = [{text:"one",category:"bee"}, {text:"two",category:"cee"}]
+let myObject = [{text:"one",category:"bee"}, {text:"two",category:"cee"}]
+let storedQuote = JSON.parse(localStorage.getItem("storedQuote"))
+if(storedQuote != null){
+myObject=storedQuote
+}
 
 function changeColor(){
   
@@ -24,10 +28,8 @@ const objFunction = () => {
   quoteList.textContent = ""; // clear previous content
   const makeList = document.createElement("ul");
   
-  const keys = Object.keys(myObject);  // get array of keys
-  
-  for (let i = 0; i < keys.length; i++) {
-    const quote = myObject[i];
+  for (let i = 0; i < storedQuote.length; i++) {
+    const quote = storedQuote[i];
     const list = document.createElement("li");
     list.textContent = `${quote.text}: ${quote.category}`;
     makeList.appendChild(list);
@@ -50,7 +52,7 @@ const showRandomQuote = () => {
   quoteList.appendChild(makeList);
 };
 
-// const objFunction = () => {
+// const createAddQuoteForm = () => {
 //   quoteList.innerHTML = '';
 //   const makeList = document.createElement("ul");
 
@@ -70,10 +72,15 @@ const newQuoteText=newQuoteField.value
 const newQuoteCat=newQuoteCatField.value
 const quote = {text:newQuoteText,category:newQuoteCat}
 myObject.push(quote)
+//Adding logic to save in local storage to local storage
+localStorage.setItem("storedQuote",JSON.stringify(myObject))
 newQuoteField.value=""
 newQuoteCatField.value=""
+
+
+
 }
-// const addQuote = () => {
+// const createAddQuoteForm = () => {
 //   const textInput = document.getElementById("newQuoteText");
 //   const catInput = document.getElementById("newQuoteCategory");
 
@@ -86,8 +93,10 @@ newQuoteCatField.value=""
 //   textInput.value = "";
 //   catInput.value = "";
 // };
+
 button.addEventListener("click",(e)=>{
     e.preventDefault()
     changeColor()
-    showRandomQuote()
+    // showRandomQuote()
+    objFunction()
 })

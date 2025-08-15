@@ -117,7 +117,7 @@ document.getElementById("exportBtn").addEventListener("click", () => {
 
   URL.revokeObjectURL(url); // cleanup
 });
-const filterQuotes=() => {
+const populateCategories=() => {
  const categories = new Set(storedQuote.map(e => e.category));
   filters.innerHTML = '<option value="all">All Categories</option>'; // reset
   console.log(`${categories}`)
@@ -153,4 +153,4 @@ button.addEventListener("click",(e)=>{
     objFunction()
 })
 
-document.addEventListener("DOMContentLoaded", filterQuotes);
+document.addEventListener("DOMContentLoaded", populateCategories);

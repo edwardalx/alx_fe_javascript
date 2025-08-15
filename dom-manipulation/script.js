@@ -2,10 +2,11 @@ let button = document.getElementById("newQuote");
 let quoteList = document.getElementById("quoteDisplay");
 const header = document.querySelector("h1");
 let myObject = [{text:"one",category:"bee"}, {text:"two",category:"cee"}]
-let storedQuote = JSON.parse(localStorage.getItem("storedQuote"))
-if(storedQuote != null){
-myObject=storedQuote
-}
+let storedQuote = JSON.parse(localStorage.getItem("storedQuote"))||myObject
+let filters = document.getElementById("categoryFilter")
+// if(storedQuote != null){
+// myObject=storedQuote
+// }
 
 function changeColor(){
   
@@ -116,6 +117,34 @@ document.getElementById("exportBtn").addEventListener("click", () => {
 
   URL.revokeObjectURL(url); // cleanup
 });
+const filterQuotes=() => {
+ const categories = new Set(storedQuote.map(e => e.category));
+  filters.innerHTML = '<option value="all">All Categories</option>'; // reset
+  console.log(`${categories}`)
+  categories.forEach((category) => {
+  const filterOptions = document.createElement("option")
+  filterOptions.textContent = category
+  filters.appendChild(filterOptions)
+  console.log(`${category}`)
+});
+}
+// const filterQuotes = () => {
+//   const filters = document.getElementById("categoryFilter");
+//   filters.innerHTML = '<option value="all">All Categories</option>'; // reset
+
+//   const quotes = JSON.parse(localStorage.getItem("storedQuote")) || myObject;
+//   console.log(quotes)
+//   const categories = new Set(quotes.map(q => q.category));
+// console.log(categories)
+//   categories.forEach(category => {
+//     const option = document.createElement("option");
+//     option.value = category;
+//     option.textContent = category;
+//     filters.appendChild(option);
+//   });
+// };
+
+
 
 button.addEventListener("click",(e)=>{
     e.preventDefault()
@@ -123,3 +152,5 @@ button.addEventListener("click",(e)=>{
     // showRandomQuote()
     objFunction()
 })
+
+document.addEventListener("DOMContentLoaded", filterQuotes);

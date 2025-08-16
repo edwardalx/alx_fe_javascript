@@ -124,9 +124,36 @@ const populateCategories=() => {
   categories.forEach((category) => {
   const filterOptions = document.createElement("option")
   filterOptions.textContent = category
+  filterOptions.value = category
   filters.appendChild(filterOptions)
   console.log(`${category}`)
 });
+}
+const filterQuotes = () => {
+  filterValue = filters.value
+  localStorage.setItem("lastSelectedFilter",filterValue)
+}
+//show selected filter data
+const showSelctedFilter = ()=>{
+const filteredList = []
+const filterValue = filters.value
+storedQuote.forEach((quote)=>{
+if (quote.category==filterValue){
+filteredList.push(quote)
+}
+if (filterValue === "all"){
+filteredList.push(quote)
+}
+})
+const list = document.createElement("ul");
+quoteList.innerHTML = ""
+filteredList.forEach(element => {
+  const listItems = document.createElement("li");
+listItems.textContent = element.text;
+list.appendChild(listItems)
+quoteList.appendChild(list)
+});
+
 }
 // const filterQuotes = () => {
 //   const filters = document.getElementById("categoryFilter");
@@ -150,7 +177,16 @@ button.addEventListener("click",(e)=>{
     e.preventDefault()
     changeColor()
     // showRandomQuote()
-    objFunction()
+    // objFunction()
+    showSelctedFilter()
 })
 
 document.addEventListener("DOMContentLoaded", populateCategories);
+document.addEventListener("DOMContentLoaded", () => {
+  const filters = document.getElementById("categoryFilter");
+  const lastSelected = localStorage.getItem("lastSelectedFilter");
+
+  if (lastSelected) {
+    filters.value = lastSelected; // set the dropdown to saved value
+  }
+});

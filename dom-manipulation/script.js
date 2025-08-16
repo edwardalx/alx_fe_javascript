@@ -136,12 +136,12 @@ const filterQuotes = () => {
 //show selected filter data
 const showSelctedFilter = ()=>{
 const filteredList = []
-const filterValue = filters.value
+const selectedCategory = filters.value
 storedQuote.forEach((quote)=>{
-if (quote.category==filterValue){
+if (quote.category==selectedCategory){
 filteredList.push(quote)
 }
-if (filterValue === "all"){
+if (selectedCategory === "all"){
 filteredList.push(quote)
 }
 })

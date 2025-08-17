@@ -180,6 +180,51 @@ button.addEventListener("click",(e)=>{
     // objFunction()
     showSelctedFilter()
 })
+async function fetchQuotesFromServer() {
+  try {
+    const response = await fetch("https://jsonplaceholder.typicode.com/posts");
+    const data = await response.json();
+
+    // Convert to your quote structure
+    const serverQuotes = data.slice(0, 5).map(item => ({
+      text: item.title,
+      category: item.body
+    }));
+
+    return serverQuotes;
+  } catch (error) {
+    console.error("Error fetching from server:", error);
+    return [];
+  }
+}
+async function syncWithServer() {
+  const serverQuotes = await fetchQuotesFromServer();
+  const localQuotes = JSON.parse(localStorage.getItem("storedQuote")) || [];
+
+  // Conflict resolution: server takes precedence
+  // (replace local data with server)
+  const merged = [...serverQuotes, ...localQuotes.filter(lq =>
+    !serverQuotes.some(sq => sq.text === lq.text && sq.category === lq.category)
+  )];
+
+  localStorage.setItem("storedQuote", JSON.stringify(merged));
+  storedQuote = merged;
+
+  console.log("Synced quotes:", merged);
+
+  populateCategories();
+  showSelctedFilter();
+}
+setInterval(syncWithServer, 30000);
+
+function notifyUser(message) {
+  const note = document.createElement("div");
+  note.textContent = message;
+  note.style.background = "yellow";
+  note.style.padding = "10px";
+  document.body.prepend(note);
+  setTimeout(() => note.remove(), 5000);
+}
 
 document.addEventListener("DOMContentLoaded", populateCategories);
 document.addEventListener("DOMContentLoaded", () => {

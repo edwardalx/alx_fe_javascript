@@ -212,7 +212,7 @@ async function postQuoteToServer(quote) {
   }
 }
 
-async function syncWithServer() {
+async function syncQuotes() {
   const serverQuotes = await fetchQuotesFromServer();
   const localQuotes = JSON.parse(localStorage.getItem("storedQuote")) || [];
 
@@ -230,7 +230,7 @@ async function syncWithServer() {
   populateCategories();
   showSelctedFilter();
 }
-setInterval(syncWithServer, 30000);
+setInterval(syncQuotes, 30000);
 
 function notifyUser(message) {
   const note = document.createElement("div");

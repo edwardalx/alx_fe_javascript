@@ -225,7 +225,7 @@ async function syncQuotes() {
   localStorage.setItem("storedQuote", JSON.stringify(merged));
   storedQuote = merged;
 
-  console.log("Synced quotes:", merged);
+  console.log("Quotes synced with server!", merged);
 
   populateCategories();
   showSelctedFilter();
